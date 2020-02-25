@@ -1,4 +1,10 @@
 package palvelinohjelmointi.Bookstore.domain;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 
 public class Book {
 // title, author, year, isbn, price
@@ -7,6 +13,11 @@ public class Book {
 	private int year;
 	private String isbn;
 	private double price;
+	
+	@Id
+	@GeneratedValue (strategy=GenerationType.AUTO) 
+	private long id;
+	
 	public Book() {
 		super();
 		// TODO Auto-generated constructor stub
