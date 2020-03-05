@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 public class Category {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long categoryid;
+	public Long categoryid;
 	private String name;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")

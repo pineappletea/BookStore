@@ -14,12 +14,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import palvelinohjelmointi.Bookstore.domain.Book;
 import palvelinohjelmointi.Bookstore.domain.BookRepository;
+import palvelinohjelmointi.Bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
+	
+	private Long IDcontainer;
 
 	@Autowired
 	private BookRepository repository;
+	
+	@Autowired
+	private CategoryRepository catrepository;
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String displayBookList(Model model) {
@@ -33,6 +39,7 @@ public class BookController {
 	@RequestMapping(value = "/addbook", method = RequestMethod.GET)
 	public String getNewBookForm(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("categories", catrepository.findAll());
 		return "addbook";
 	}
 
@@ -51,16 +58,17 @@ public class BookController {
 	@RequestMapping(value = "/editbook/{id}", method = RequestMethod.GET)
 	public String showEditBook(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("book", repository.findById(id));
+		model.addAttribute("categories", catrepository.findAll());
+		IDcontainer = id;
 		return "editbook";
 	}
 	// lähetetään muokattu kirja tietokantaan
-	@RequestMapping(value = "editbook/save/{id}", method = RequestMethod.POST)
-	public String editBook(@ModelAttribute Book book, @PathVariable("id") Long id) {
-		repository.deleteById(id);
-		book.setID(id);
+	@RequestMapping(value = "save/", method = RequestMethod.POST)
+	public String editBook(Book book) {
+		book.setID(IDcontainer);
 		repository.save(book);
 		System.out.println((book.getId()));
-		return "redirect:../../index";
+		return "redirect:../index";
 	}
 }
 
