@@ -26,19 +26,21 @@ public class BookstoreApplication {
 			// String title, String author, int year, 
 						// String isbn, double price)
 			
+			log.info("Create categories");
+			catRepository.save(new Category("Romaanit"));
+			catRepository.save(new Category("Lasten ja nuorten kirjat"));
+			
 			log.info("Create a couple of books");
-			bookRepository.save(new Book("Pikku Prinssi", "Antoine de Saint-Exupéry", 1997, "9789510069851", 12.90));
-			bookRepository.save(new Book("Sinuhe egyptiläinen", "Mika Waltari", 1997, "9789510098752", 29.90));
+			bookRepository.save(new Book("Pikku Prinssi", "Antoine de Saint-Exupéry", 1997, "9789510069851", 12.90,
+					catRepository.findByName("Lasten ja nuorten kirjat").get(0)));
+			bookRepository.save(new Book("Sinuhe egyptiläinen", "Mika Waltari", 1997, "9789510098752", 29.90, 
+					catRepository.findByName("Romaanit").get(0)));
 			
 			log.info("fetch all books");
 			for (Book book : bookRepository.findAll()) {
 				log.info(book.toString());
 			}
 			// public Category(String name, List<Book> books)
-			
-			log.info("Create categories");
-			catRepository.save(new Category("Romaanit"));
-			catRepository.save(new Category("Lasten ja nuorten kirjat"));
 			
 			log.info("fetch all categories");
 			for (Category category : catRepository.findAll()) {
