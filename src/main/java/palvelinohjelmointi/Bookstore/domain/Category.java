@@ -16,7 +16,7 @@ public class Category {
 	private Long categoryid;
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "department")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 	private List<Book> books;
 	
 	public Category() {}
@@ -31,7 +31,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + categoryid + ", name=" + name + ", books=" + books + "]";
+		return "Category [id=" + categoryid + ", name=" + name + "]";
 	}
 
 	public String getName() {

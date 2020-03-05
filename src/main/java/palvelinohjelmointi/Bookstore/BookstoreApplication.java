@@ -31,14 +31,21 @@ public class BookstoreApplication {
 			bookRepository.save(new Book("Sinuhe egyptiläinen", "Mika Waltari", 1997, "9789510098752", 29.90));
 			
 			log.info("fetch all books");
-			for (Book student : bookRepository.findAll()) {
-				log.info(student.toString());
+			for (Book book : bookRepository.findAll()) {
+				log.info(book.toString());
 			}
 			// public Category(String name, List<Book> books)
 			
 			log.info("Create categories");
 			catRepository.save(new Category("Romaanit"));
 			catRepository.save(new Category("Lasten ja nuorten kirjat"));
+			
+			log.info("fetch all categories");
+			for (Category category : catRepository.findAll()) {
+				log.info(category.toString());
+			}
+			
+			
 	};
 	}
 	public static void main(String[] args) {
