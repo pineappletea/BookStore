@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 
@@ -19,9 +21,10 @@ public class Book {
 	
 	@Id
 	@GeneratedValue (strategy=GenerationType.AUTO) 
-	public long id;
+	private long id;
 	
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "categoryid")
     private Category category;
 
@@ -59,7 +62,7 @@ public class Book {
 	public long getId() {
 		return id;
 	}
-	public void setID(long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
