@@ -10,9 +10,11 @@
 // String title, String author, int year, 
 // String isbn, double price)
  -->
-	<h1>Books!</h1>
+	<h1 th:inline="text"> Books for you, [[${#httpServletRequest.remoteUser}]]! </h1>
 		<table class="table table-striped">
-		<tr> <th>Title</th> <th>Author</th> <th>Year</th> <th>ISBN</th> <th>Price</th> <th></th> <th></th> <th></th>
+		<tr> <th>Title</th> <th>Author</th> <th>Year</th> <th>ISBN</th> <th>Price</th> <th></th> 
+		<th></th> 
+		<th></th>
 		</tr>
 		<tr th:each="book : ${books}">
 		<td th:text="${book.title}"></td>
@@ -26,7 +28,10 @@
 		<td><a th:href="@{/editbook/{id}(id=${book.id})}" class="btn btn-success">Edit</a></td>
 		</tr> 
 		</table>
-		<a href="/addbook">Add book</a>
+		<a th:href="@{/addbook}" class="btn btn-success" >Add book</a>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+		</form>
 
 </body>
 </html>

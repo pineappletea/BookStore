@@ -29,14 +29,19 @@ public class BookController {
 	
 	@Autowired
 	private CategoryRepository catrepository;
+	
+	@RequestMapping(value= "/login")
+	public String login() {
+		return "login";
+	}
 
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value = {"/index", "/booklist"}, method = RequestMethod.GET)
 	public String displayBookList(Model model) {
 		// List<Book> books = new ArrayList<Book>();
 		// books.addAll((Collection<? extends Book>) repository.findAll());
 		// System.out.println(books);
 		model.addAttribute("books", repository.findAll());
-		return "index";
+		return "listbook";
 	}
 	
 	@RequestMapping(value = "/addbook", method = RequestMethod.GET)
