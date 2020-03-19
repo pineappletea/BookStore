@@ -14,6 +14,8 @@ import palvelinohjelmointi.Bookstore.domain.Book;
 import palvelinohjelmointi.Bookstore.domain.BookRepository;
 import palvelinohjelmointi.Bookstore.domain.Category;
 import palvelinohjelmointi.Bookstore.domain.CategoryRepository;
+import palvelinohjelmointi.Bookstore.domain.User;
+import palvelinohjelmointi.Bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -21,7 +23,8 @@ public class BookstoreApplication {
 	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 	
 	@Bean
-	public CommandLineRunner demo(BookRepository bookRepository, CategoryRepository catRepository){
+	public CommandLineRunner demo(BookRepository bookRepository, CategoryRepository catRepository
+			, UserRepository urepository){
 		return(args) -> {
 			// String title, String author, int year, 
 						// String isbn, double price)
@@ -47,7 +50,14 @@ public class BookstoreApplication {
 				log.info(category.toString());
 			}
 			
-			
+// User(String username, String email, String password, String role)
+			// Create users: admin/admin user/user
+			User user1 = new User("user", "user@test", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
+			User user2 = new User("admin", "admin@test", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
+			urepository.save(user1);
+			log.info(user1.toString());
+			urepository.save(user2);
+			log.info(user2.toString());
 	};
 	}
 	public static void main(String[] args) {
