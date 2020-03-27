@@ -24,7 +24,7 @@
 		<td th:text="${book.price}"></td>
 		<td th:text="${book.category}? ${book.category.name} : 'No category'"></td>
 		<input type="hidden" th:value="${book.id}"/>
-		<td><a th:href="@{/deletebook/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
+		<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/deletebook/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
 		<td><a th:href="@{/editbook/{id}(id=${book.id})}" class="btn btn-success">Edit</a></td>
 		</tr> 
 		</table>
